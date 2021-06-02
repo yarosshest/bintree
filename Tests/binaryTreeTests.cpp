@@ -33,7 +33,12 @@ TEST(binary_tree, where) {
     for(int i=0; i<10; i++)
         tree.insert(i);
 
+    for(int i=0; i<5; i++)
+        treeT.insert(i);
+
     binary_tree<int> where = tree.where([](int data) {return data <5;});
+    treeT.print();
+    where.print();
     bool res = where == treeT;
     ASSERT_TRUE(res);
 }
