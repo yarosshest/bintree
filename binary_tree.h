@@ -24,11 +24,22 @@ public:
     void insert(T key);
     void delete_elem(T key);
     tree_el<T>* find(T key);
+    void map(T(*fk)(T));
+    binary_tree<T> where (bool(*fk)(T));
+    T reduce (T(*fk)(T,T),T c);
+
+
+
     //redefining the standard operator
-    void print();
+    bool operator==(binary_tree<T> treeE);
+
+
 
     //special methods
     vector<T> values();
+    void print();
+    void print_mod();
+    T min();
 };
 
 

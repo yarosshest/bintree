@@ -63,11 +63,58 @@ vector<T> binary_tree<T>::values()
 template<typename T>
 void binary_tree<T>::print()
 {
-   m_root->print_subtree();
+    node_print_state_t* _root_state = NULL;
+   m_root->print_subtree(_root_state);
 }
 
 template<typename T>
 void binary_tree<T>::insert(T key)
 {
-    m_root->Insert(key);
+    if (m_root == nullptr)
+    {
+        tree_el<T> *root = new tree_el(key);
+        m_root = root;
+    }
+    else
+        m_root = m_root->Insert(key);
+}
+
+
+template<typename T>
+void binary_tree<T>::map(T(*fk)(T))
+{
+    m_root->map(fk);
+}
+
+template<typename T>
+binary_tree<T> binary_tree<T>::where(bool(*fk)(T))
+{
+    vector<T> result;
+    m_root->where(fk,result);
+    int size = result.size();
+
+    binary_tree<T> tree = *(new binary_tree<T>);
+    for(int i=0; i<size; i++)
+        tree.insert(result.at(i));
+    return tree;
+}
+template<typename T>
+bool binary_tree<T>::operator==(binary_tree<T> treeE)
+{
+    bool result = false;
+    result = m_root->equal(*treeE.m_root);
+    return result;
+}
+
+template<typename T>
+T binary_tree<T>::reduce(T (*fk)(T,T),T c) {
+    T min = m_root->min();
+    T cont;
+    m_root->reduce(fk,cont,c,min);
+    return cont;
+}
+
+template<typename T>
+T binary_tree<T>::min() {
+    return m_root->min();
 }

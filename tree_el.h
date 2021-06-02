@@ -5,8 +5,15 @@
 #ifndef TREE_TREE_EL_H
 #define TREE_TREE_EL_H
 #include <iostream>
-
+#include <vector>
 using namespace std;
+
+struct node_print_state_t {
+    node_print_state_t* child_state;
+
+    bool printing_last_child;
+};
+
 template<typename T>
 class tree_el{
 public:
@@ -18,18 +25,25 @@ public:
     tree_el(T key);
     tree_el(T key,tree_el<T>* left,tree_el<T>* right);
 
+    void map(T(*fk)(T));
+    void where(bool(*fk)(T),vector<T>& tree);
+    void reduce (T(*fk)(T,T),T& cont,T c, T min);
+
 
     //redefining the standard operator
     friend ostream& operator<< (ostream &out, tree_el<T> &point);
 
     void fixheight();
-    void print_subtree();
+    void print_subtree(node_print_state_t* _root_state);
     int bf();
     tree_el<T>* LeftRotation();
     tree_el<T>* RightRotation();
     tree_el<T>* Balance();
 
+    bool equal(tree_el el);
+
     tree_el<T> *Insert(T k);
+    T min();
 };
 
 
