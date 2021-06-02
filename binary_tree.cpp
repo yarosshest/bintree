@@ -94,8 +94,8 @@ binary_tree<T> binary_tree<T>::where(bool(*fk)(T))
     int size = result.size();
 
     binary_tree<T> tree = *(new binary_tree<T>);
-    for(int i=0; i<size; i++)
-        tree.insert(result.at(i));
+    for(int i=1; i<=size; i++)
+        tree.insert(result.at(size-i));
     return tree;
 }
 template<typename T>
