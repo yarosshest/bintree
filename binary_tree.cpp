@@ -123,7 +123,7 @@ template<typename T>
 string binary_tree<T>::printPath(string path) {
     if(path.size()==3)
     {
-        string result;
+        string result;*-
         m_root->printPath(result,path[0],path[1],path[2]);
         return result;
     }
@@ -158,8 +158,8 @@ void binary_tree<T>::wareGraph(string path) {
 template<typename T>
 binary_tree<T> binary_tree<T>::getSubtree(T key) {
     binary_tree<T> tree;
-    tree->m_root = find(key);
-    return *tree;
+    tree.m_root = find(key);
+    return tree;
 }
 
 template<typename T>
@@ -174,4 +174,9 @@ string binary_tree<T>::GraphViz() {
 template<typename T>
 void binary_tree<T>::Balance() {
     m_root = m_root->reBalance();
+}
+
+template<typename T>
+void binary_tree<T>::delete_elem(T key) {
+    m_root = m_root->delete_elem(key);
 }

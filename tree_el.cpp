@@ -332,3 +332,34 @@ tree_el<T> *tree_el<T>::reBalance() {
         m_left->reBalance();
     return Balance();
 }
+template<typename T>
+tree_el<T> *SearchMin(tree_el<T> *x)
+{
+    if (x->m_left) return SearchMin(x->m_left);
+    else return x;
+}
+template<typename T>
+tree_el<T> *DeleteMin(tree_el<T> *x)
+{
+    if (x->m_left==0) return x->m_left;
+    x->m_left=DeleteMin(x->m_left);
+    return x->Balance();
+}
+
+template<typename T>
+tree_el<T>* tree_el<T>::delete_elem(T key) {
+    if ((key<m_data)&&(m_left != NULL)&&(!left_tag)) m_left = m_left->delete_elem(key);
+    else if ((key>m_data)&&(m_right != NULL)&&(!right_tag)) m_right=m_right->delete_elem(key);
+    else
+    {
+        tree_el<T> *y=m_left;
+        tree_el<T> *z=m_right;
+        delete this;
+        if (!z) return y;
+        tree_el<T>* min=SearchMin(z);
+        min->m_right=DeleteMin(z);
+        min->m_left=y;
+        return min->Balance();
+    }
+    return this->Balance();
+}

@@ -33,6 +33,7 @@ public:
     void reduce (T(*fk)(T,T),T& cont,T c, T min);
     void printPath(string& result,char first,char second ,char third);
     void warePath(vector<tree_el<T>*>&,char first,char second ,char third);
+    tree_el<T>* delete_elem(T key);
 
 
     //redefining the standard operator
