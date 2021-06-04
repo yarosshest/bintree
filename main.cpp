@@ -3,12 +3,14 @@
 
 int main() {
     binary_tree<int> tree;
-    binary_tree<int> treeT;
+    binary_tree<int> Tree;
 
-    for(int i=0; i<10; i++)
+    for(int i=0; i<70; i++)
         tree.insert(i);
 
-    binary_tree<int> where = tree.where([](int data) {return data <5;});
-    where.print();
-}
+    tree.print();
 
+    tree.wareGraph("NRL");
+    tree.Balance();
+    cout << tree.GraphViz();
+}

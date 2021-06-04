@@ -27,6 +27,12 @@ public:
     void map(T(*fk)(T));
     binary_tree<T> where (bool(*fk)(T));
     T reduce (T(*fk)(T,T),T c);
+    string printPath(string path);
+    string printLNR();
+    void wareGraph(string path);
+    binary_tree<T> getSubtree(T key);
+    string GraphViz();
+    void Balance();
 
 
 

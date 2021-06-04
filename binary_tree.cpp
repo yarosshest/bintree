@@ -118,3 +118,60 @@ template<typename T>
 T binary_tree<T>::min() {
     return m_root->min();
 }
+
+template<typename T>
+string binary_tree<T>::printPath(string path) {
+    if(path.size()==3)
+    {
+        string result;
+        m_root->printPath(result,path[0],path[1],path[2]);
+        return result;
+    }
+}
+
+template<typename T>
+string binary_tree<T>::printLNR() {
+    string result;
+    m_root->printPath(result,'L','N','R');
+    return result;
+}
+
+template<typename T>
+void binary_tree<T>::wareGraph(string path) {
+    vector<tree_el<T>*> leaf;
+    m_root->warePath(leaf,path[0],path[1],path[2]);
+    for(int i=0; i<leaf.size(); ++i)
+    {
+        if((leaf[i]->m_left == NULL)&&(i!=0))
+        {
+            leaf[i]->m_left = (leaf[i-1]);
+            leaf[i]->left_tag = true;
+        }
+        if((leaf[i]->m_right == NULL)&&(i!=leaf.size()-1))
+        {
+            leaf[i]->m_right = (leaf[i+1]);
+            leaf[i]->right_tag = true;
+        }
+    }
+}
+
+template<typename T>
+binary_tree<T> binary_tree<T>::getSubtree(T key) {
+    binary_tree<T> tree;
+    tree->m_root = find(key);
+    return *tree;
+}
+
+template<typename T>
+string binary_tree<T>::GraphViz() {
+    string result;
+    result.append("https://quickchart.io/graphviz?graph=digraph{");
+    m_root->GraphViz(result);
+    result.append("}");
+    return  result;
+}
+
+template<typename T>
+void binary_tree<T>::Balance() {
+    m_root = m_root->reBalance();
+}
